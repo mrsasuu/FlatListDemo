@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import { ExampleContainer } from '@/Containers'
 import { createStackNavigator } from '@react-navigation/stack'
 import Header from '@/Components/Header'
@@ -15,7 +16,8 @@ const MainNavigator = () => {
         component={ExampleContainer}
         options={{
           headerTitle: () => <Header />,
-          headerRight: () => <SwitchThemeButton />,
+          headerRight: () =>
+            Platform.OS === 'ios' ? <SwitchThemeButton /> : null,
         }}
       />
     </Stack.Navigator>

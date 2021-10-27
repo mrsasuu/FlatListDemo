@@ -35,6 +35,7 @@ const ListScreen = () => {
     ({ item }: { item: ItemProps }) => {
       return (
         <FlatListItem
+          key={item.id}
           index={item.id}
           onPress={() => handleItemClicked(item.id)}
           {...item}

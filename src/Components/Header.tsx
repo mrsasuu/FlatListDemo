@@ -6,7 +6,7 @@ import { ListState } from '@/Store/List'
 import { SwitchThemeButton } from '@/Components/index'
 
 const Header = () => {
-  const { Fonts, Layout } = useTheme()
+  const { Fonts, Layout, Gutters } = useTheme()
   const selectedListItems = useSelector(
     (state: { list: ListState }) => state.list.selectedItems,
   )
@@ -30,7 +30,11 @@ const Header = () => {
       <Text
         numberOfLines={1}
         ellipsizeMode="tail"
-        style={[Fonts.textRegular, styles.titleContainer]}
+        style={[
+          Fonts.textRegular,
+          styles.titleContainer,
+          Gutters.regularRMargin,
+        ]}
       >
         Selected items: {selectedListItems.toString()}
       </Text>
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleContainer: {
-    flex: 8,
+    flex: 3,
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
