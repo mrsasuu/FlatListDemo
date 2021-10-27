@@ -1,25 +1,28 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
-import { Switch } from 'react-native-paper'
-import { useDispatch, useSelector } from 'react-redux'
+import { View, Text, StyleSheet, Platform } from 'react-native'
+import { useSelector } from 'react-redux'
 import { useTheme } from '@/Hooks'
 import { ListState } from '@/Store/List'
-import Sun from '@/Assets/Images/icons/sun.png'
-import Moon from '@/Assets/Images/icons/moon.png'
-import { changeTheme, ThemeState } from '@/Store/Theme'
+import { SwitchThemeButton } from '@/Components/index'
 
 const Header = () => {
-  const { Fonts, Colors, Layout, Gutters } = useTheme()
-  const dispatch = useDispatch()
+  const { Fonts, Layout } = useTheme()
   const selectedListItems = useSelector(
     (state: { list: ListState }) => state.list.selectedItems,
   )
-  const isDark = useSelector(
-    (state: { theme: ThemeState }) => state.theme.darkMode,
-  )
 
-  const onSwitchChange = () => {
-    dispatch(changeTheme({ theme: undefined, darkMode: !isDark }))
+  if (Platform.OS === 'ios') {
+    return (
+      <View style={styles.IOSContainer}>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={[Fonts.textRegular, styles.titleContainer]}
+        >
+          Selected items: {selectedListItems.toString()}
+        </Text>
+      </View>
+    )
   }
 
   return (
@@ -31,15 +34,7 @@ const Header = () => {
       >
         Selected items: {selectedListItems.toString()}
       </Text>
-      <View style={[Layout.row, Layout.rowHEnd, styles.switchContainer]}>
-        <Image source={Sun} style={[Gutters.regularLMargin, styles.icon]} />
-        <Switch
-          value={isDark || false}
-          color={Colors.primary}
-          onValueChange={onSwitchChange}
-        />
-        <Image source={Moon} style={[Gutters.smallLMargin, styles.icon]} />
-      </View>
+      <SwitchThemeButton />
     </View>
   )
 }
@@ -49,11 +44,23 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
+  IOSContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
   titleContainer: {
     flex: 8,
-  },
-  switchContainer: {
-    flex: 4,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
 })
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import { withTheme } from 'react-native-paper'
 import { ExampleContainer } from '@/Containers'
 import { createStackNavigator } from '@react-navigation/stack'
 import Header from '@/Components/Header'
+import { SwitchThemeButton } from '@/Components'
 
 const Stack = createStackNavigator()
 
@@ -15,10 +15,11 @@ const MainNavigator = () => {
         component={ExampleContainer}
         options={{
           headerTitle: () => <Header />,
+          headerRight: () => <SwitchThemeButton />,
         }}
       />
     </Stack.Navigator>
   )
 }
 
-export default withTheme(MainNavigator)
+export default MainNavigator

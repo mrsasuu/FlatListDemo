@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react'
 import { useTheme } from '@/Hooks'
 import { Linking, StyleSheet, Text, View } from 'react-native'
-import { Checkbox, List } from 'react-native-paper'
+import CheckBox from '@react-native-community/checkbox'
+import { List } from 'react-native-paper'
 import { formatLink, validURL } from '@/Utils/Utils'
 
 interface FlatListItemProps {
@@ -31,8 +32,9 @@ const FlatListItem: FC<FlatListItemProps> = ({
   }
 
   return (
-    <View>
+    <View key={index}>
       <List.Item
+        key={index}
         title={''}
         titleStyle={styles.hidden}
         description={() => (
@@ -70,12 +72,12 @@ const FlatListItem: FC<FlatListItemProps> = ({
           handleOnPressCheckbox()
         }}
         left={props => (
-          <Checkbox.Item
+          <CheckBox
             {...props}
-            color={Colors.primary}
-            uncheckedColor={Colors.primary}
-            label=""
-            status={isCheckedLocal ? 'checked' : 'unchecked'}
+            onCheckColor={Colors.primary}
+            onTintColor={Colors.primary}
+            tintColors={{ true: Colors.primary, false: Colors.primary }}
+            value={isCheckedLocal}
           />
         )}
         hasTVPreferredFocus={false}

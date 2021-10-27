@@ -12,6 +12,8 @@ plugins.push([
   },
 ])
 
+plugins.push(['optional-require'])
+
 module.exports = {
   presets,
   plugins,
