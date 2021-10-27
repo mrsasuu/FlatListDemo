@@ -1,5 +1,5 @@
 import React, { useState, FC, ReactElement } from 'react'
-import { SafeAreaView, FlatList, StyleSheet, StatusBar } from 'react-native'
+import { SafeAreaView, FlatList, StyleSheet } from 'react-native'
 import { List } from 'react-native-paper'
 import { ItemProps } from '@/Models/Item'
 
